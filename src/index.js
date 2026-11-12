@@ -7,8 +7,10 @@ const tempValue = document.getElementById('tempValue');
 const landscape = document.getElementById('landscape');
 const headerCityName = document.getElementById('headerCityName');
 const skyDropdown = document.getElementById('skySelect');
+const cityNameReset = document.getElementById('cityNameReset');
 
 let temperature = 0;
+const defaultCity = 'Seattle';
 
 // Update temperature display color and landscape
 const updateTempGraphics = (temperature) => {
@@ -155,6 +157,12 @@ const updateCityName = () => {
     headerCityName.textContent = cityNameInput.value;
 };
 
+// Reset city name
+
+const resetCityName = () => {
+    cityNameInput.value = defaultCity;
+    updateCityName();
+};
 
 // Event logic
 
@@ -162,6 +170,7 @@ const registerEventHandlers = () => {
     decreaseTempControl.addEventListener('click', decreaseTemperature);
     increaseTempControl.addEventListener('click', increaseTemperature);
     cityNameInput.addEventListener('input', updateCityName);
+    cityNameReset.addEventListener('click', resetCityName);
     currentTempButton.addEventListener('click', () => {
         const city = cityNameInput.value.trim();
         changeTempWithCity(city);
