@@ -8,37 +8,56 @@ const landscape = document.getElementById('landscape');
 const headerCityName = document.getElementById('headerCityName');
 const skyDropdown = document.getElementById('skySelect');
 const cityNameReset = document.getElementById('cityNameReset');
+const headerWeather = document.getElementById('weatherHeader');
+const headerGarden = document.getElementById('gardenHeader');
+const headers = [headerWeather, headerCityName, headerGarden];
 
 let temperature = 0;
 const defaultCity = 'Seattle';
 
-// Update temperature display color and landscape
+// Update temp font color and landscape image
+
 const updateTempGraphics = (temperature) => {
-    if (temperature >= 90) {
-        tempValue.style.color = 'red';
-        changeImage('landscape_photos/desert.jpg', landscape);
-    } else if (temperature < 90 && temperature >= 80) {
-        tempValue.style.color = 'pink';
-        changeImage('landscape_photos/beach.jpg', landscape);
-    } else if (temperature < 80 && temperature >= 70) {
-        tempValue.style.color = 'orange'
-        changeImage('landscape_photos/meadow.jpg', landscape);
-    } else if (temperature < 70 && temperature >= 60) {
-        tempValue.style.color = 'yellow'
-        changeImage('landscape_photos/springs.jpg', landscape);
-    } else if (temperature < 60 && temperature >= 50) {
-        tempValue.style.color = 'green'
-        changeImage('landscape_photos/forest.jpg', landscape);
-    } else if (temperature < 50 && temperature >= 40) {
-        tempValue.style.color = 'teal'
-        changeImage('landscape_photos/mist.jpg', landscape);
-    } else {
-        tempValue.style.color = 'blue'
-        changeImage('landscape_photos/snow.jpg', landscape);
+    switch (true) {
+        case temperature >= 90:
+            tempValue.style.color = 'red';
+            changeImage('landscape_photos/desert.jpg', landscape);
+            break;
+
+        case temperature >= 80:
+            tempValue.style.color = 'pink';
+            changeImage('landscape_photos/beach.jpg', landscape);
+            break;
+
+        case temperature >= 70:
+            tempValue.style.color = 'orange'
+            changeImage('landscape_photos/meadow.jpg', landscape);
+            break;
+
+        case temperature >= 60:
+            tempValue.style.color = 'yellow'
+            changeImage('landscape_photos/springs.jpg', landscape);
+            break;
+
+        case temperature >= 50:
+            tempValue.style.color = 'green'
+            changeImage('landscape_photos/forest.jpg', landscape);
+            break;
+
+        case temperature >= 40:
+            tempValue.style.color = 'teal'
+            changeImage('landscape_photos/mist.jpg', landscape);
+            break;
+
+        case temperature < 40:
+            tempValue.style.color = 'blue'
+            changeImage('landscape_photos/snow.jpg', landscape);
+            break;
     }
 };
 
 // Change landscape
+
 const changeImage = (imageName, container) => {
     const image = document.createElement('img');
 
@@ -47,18 +66,21 @@ const changeImage = (imageName, container) => {
 };
 
 // Temperature controls
+
 const updateTemp = () => {
     tempValue.textContent = `${temperature}°F`;
     updateTempGraphics(temperature);
 };
 
 // Increase temperature
+
 const increaseTemperature = () => {
     temperature += 1;
     updateTemp();
 };
 
 // Decrease temperature
+
 const decreaseTemperature = () => {
     temperature -= 1;
     updateTemp();
@@ -66,26 +88,50 @@ const decreaseTemperature = () => {
 
 
 // Update the sky
+
 const updateSky = (skySelect) => {
-    if (skySelect === 'Sunny') {
-        document.body.style.backgroundImage = "url('./assets/sky_photos/sunny.jpg')";
-    } else if (skySelect === 'Cloudy') {
-        document.body.style.backgroundImage = "url('./assets/sky_photos/cloudy.jpg')";
-    } else if (skySelect === 'Stormy') {
-        document.body.style.backgroundImage = "url('./assets/sky_photos/stormy.jpg')";
-    } else if (skySelect === 'Rainy') {
-        document.body.style.backgroundImage = "url('./assets/sky_photos/rainy.jpg')";
-    } else if (skySelect === 'Snowy') {
-        document.body.style.backgroundImage = "url('./assets/sky_photos/snowy.jpg')";
-    } else if (skySelect === 'Dusk') {
-        document.body.style.backgroundImage = "url('./assets/sky_photos/dusk.jpg')";
-    } else if (skySelect === 'Dawn') {
-        document.body.style.backgroundImage = "url('./assets/sky_photos/dawn.jpg')";
-    } else if (skySelect === 'Rainbow') {
-        document.body.style.backgroundImage = "url('./assets/sky_photos/rainbow.jpg')";
+    switch (skySelect) {
+        case 'Sunny':
+            document.body.style.backgroundImage = "url('./assets/sky_photos/sunny.jpg')";
+            headers.forEach(header => header.style.color = '#f4fac0');
+            break;
+
+        case 'Cloudy':
+            document.body.style.backgroundImage = "url('./assets/sky_photos/cloudy.jpg')";
+            headers.forEach(header => header.style.color = '#5c5c5c');
+            break;
+
+        case 'Stormy':
+            document.body.style.backgroundImage = "url('./assets/sky_photos/stormy.jpg')";
+            headers.forEach(header => header.style.color = '#e3acfc');
+            break;
+
+        case 'Rainy':
+            document.body.style.backgroundImage = "url('./assets/sky_photos/rainy.jpg')";
+            headers.forEach(header => header.style.color = '#494f70');
+            break;
+
+        case 'Snowy':
+            document.body.style.backgroundImage = "url('./assets/sky_photos/snowy.jpg')";
+            headers.forEach(header => header.style.color = '#d1f7ff');
+            break;
+
+        case 'Dusk':
+            document.body.style.backgroundImage = "url('./assets/sky_photos/dusk.jpg')";
+            headers.forEach(header => header.style.color = '#e39a84');
+            break;
+
+        case 'Dawn':
+            document.body.style.backgroundImage = "url('./assets/sky_photos/dawn.jpg')";
+            headers.forEach(header => header.style.color = '#f7d974');
+            break;
+
+        case 'Rainbow':
+            document.body.style.backgroundImage = "url('./assets/sky_photos/rainbow.jpg')";
+            headers.forEach(header => header.style.color = '#8cf5bd');
+            break;
     }
 };
-
 
 // Location and weather API
 
